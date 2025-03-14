@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from "r
 import React, { useContext, useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import About from "./pages/About";
 import BrowseLayouts from "./pages/BrowseLayouts";
 import ContactUs from "./pages/ContactUs";
 import Home from "./pages/Home";
@@ -16,8 +15,11 @@ import LoadingScreen from "./components/LoadingScreen";
 import Creative from "./pages/Creative";
 import ClassicTemp from "./templates/ClassicTemp";
 import Auth from "./pages/Auth";
+import "nprogress/nprogress.css";
+import NProgress from "nprogress";
 const AUTO_LOGOUT_TIME = 10 * 60 * 1000;
 const App = () => {
+  
   const { resumeData } = useContext(ResumeContext);
   const { user } = useAuth();
   const [loading, setLoading] = useState(true);
@@ -65,6 +67,7 @@ const App = () => {
       );
     };
   }, [user]);
+  
 
   return (
     <>
@@ -72,11 +75,11 @@ const App = () => {
         <LoadingScreen onFinish={() => setLoading(false)} />
       ) : (
         <Router basename="/nak-resume-builder">
+          <ProgressBar />
           <Layout>
            <Routes>
   <Route path="/" element={<Home />} />  
   <Route path="/home" element={<Home />} />
-  <Route path="/about" element={<About />} />
   <Route path="/contact" element={<ContactUs />} />
   <Route element={<PrivateRoute />}>
     <Route path="/layouts" element={<BrowseLayouts />} />
@@ -94,6 +97,20 @@ const App = () => {
       )}
     </>
   );
+};
+const ProgressBar = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    NProgress.start(); // Start progress bar
+    setTimeout(() => NProgress.done(), 500); // Simulate delay for smooth transition
+
+    return () => {
+      NProgress.done(); // Ensure it stops when navigating
+    };
+  }, [location.pathname]);
+
+  return null;
 };
 
 export default App;

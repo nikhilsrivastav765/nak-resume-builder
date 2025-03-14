@@ -1,70 +1,108 @@
-import React, { useEffect } from "react";
+import { motion } from "framer-motion";
+import React, { useEffect, useRef } from "react";
 import { RxCross1 } from "react-icons/rx";
-import { TbMathGreater } from "react-icons/tb";
-import { Link } from "react-router-dom"; // Fixed incorrect import
-const Menu = ({ toggleMenu, isMenuOpen }) => {
+import { IoHome } from "react-icons/io5";
+import { FaPhoneAlt } from "react-icons/fa";
+import { RiLayout2Fill } from "react-icons/ri";
+import { useNavigate } from "react-router-dom";
 
+const Menu = ({ toggleMenu, isMenuOpen }) => {
+  const navigate = useNavigate();
+  const menuRef = useRef(null);
+
+  // Close the menu when clicking outside
   useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        closeMenuWithAnimation();
+      }
+    };
+
     if (isMenuOpen) {
-      document.body.style.overflow = "hidden";
+      document.addEventListener("mousedown", handleOutsideClick);
     } else {
-      document.body.style.overflow = "auto";
+      document.removeEventListener("mousedown", handleOutsideClick);
     }
 
-    // Cleanup function to restore scroll when component unmounts
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [isMenuOpen]); // Runs only when isMenuOpen changes
+    return () => document.removeEventListener("mousedown", handleOutsideClick);
+  }, [isMenuOpen]);
+
+  // Function to close the menu with animation
+  const closeMenuWithAnimation = () => {
+    const menu = document.querySelector(".menu");
+    menu.style.transform = "translateX(-100%)"; // Slide out animation
+
+    setTimeout(() => {
+      toggleMenu(); // Close the menu after animation
+    }, 300); // Match transition duration
+  };
+
+  // Function to navigate and close menu
+  const handleNavigation = (path) => {
+    closeMenuWithAnimation();
+    setTimeout(() => navigate(path), 300); // Wait for animation
+  };
 
   return (
-    <div
-      className={`menu fixed w-full h-screen bg-gray-100 z-[1] py-3 top-0 left-0 transition-transform duration-300 ${
+    <motion.div
+      ref={menuRef}
+      initial={{ x: -100 }}
+      animate={{ x: 0 }}
+      exit={{ x: -100 }} // Exit animation
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className={`menu fixed w-1/4 h-fit bg-gray-100 z-[10] py-3 top-0 left-0 transition-transform duration-300 backdrop-blur-lg shadow-lg border border-white/40 ${
         isMenuOpen ? "translate-x-0" : "-translate-x-full"
       }`}
     >
-      <div className="flex items-center justify-between h-16 px-5">
-        <h1 className="lg:text-2xl font-bold text-xl">
-          <span className="text-[#4F46E5]">NAK</span>res.builder
-        </h1>
-        <button onClick={toggleMenu}>
+      {/* Close Button */}
+      <motion.div className="flex items-center justify-between h-16 px-5">
+        <button onClick={closeMenuWithAnimation}>
           <RxCross1 className="text-3xl text-black mr-3" />
         </button>
-      </div>
+      </motion.div>
+
+      {/* Menu Items */}
       <div className="relative">
-        <ul className="flex gap-10 flex-col px-5 mt-5">
-          <li className="text-gray-600 text-xl font-semibold">
-            <Link onClick={toggleMenu} className="flex justify-between" to="/home">
-              Home <TbMathGreater className="text-gray-500 text-xl mr-4 font-semibold" />
-            </Link>
-          </li>
-          <li className="text-gray-600 text-xl font-semibold">
-            <Link onClick={toggleMenu} className="flex justify-between" to="/about">
-              About Us <TbMathGreater className="text-gray-500 text-xl mr-4 font-semibold" />
-            </Link>
-          </li>
-          <li className="text-gray-600 text-xl font-semibold">
-            <Link onClick={toggleMenu} className="flex justify-between" to="/contact">
-              Contact Us <TbMathGreater className="text-gray-500 text-xl mr-4 font-semibold" />
-            </Link>
-          </li>
-          <li className="text-gray-600 text-xl font-semibold">
-            <Link onClick={toggleMenu} className="flex justify-between" to="/layouts">
-              Browse Layouts <TbMathGreater className="text-gray-500 text-xl mr-4 font-semibold" />
-            </Link>
-          </li>
-          <li>
-        <button
-              onClick={toggleMenu}
-              className="text-3xl bg-[#4F46E5] text-white w-full py-3 font-semibold"
-              to="/layouts" 
-            >
-              Get Started
-            </button>
-          </li>
-        </ul>
+        <div className="flex flex-col h-fit items-center gap-2 mt-8">
+          <motion.div
+            onClick={() => handleNavigation("/home")}
+            className="relative flex items-center justify-center w-10 h-10 rounded-2xl cursor-pointer"
+          >
+            <motion.div className="absolute w-16 h-16 bg-[#4F46E5] rounded-2xl -z-10" />
+            <IoHome className="text-white text-6xl " />
+          </motion.div>
+          <p className="mt-4 text-sm font-semibold text-gray-600 text-center">
+            Home
+          </p>
+        </div>
+
+        <div className="flex flex-col h-fit items-center gap-2 mt-8">
+          <motion.div
+            onClick={() => handleNavigation("/contact")}
+            className="relative flex items-center justify-center w-10 h-10 rounded-2xl cursor-pointer"
+          >
+            <motion.div className="absolute w-16 h-16 bg-[#4F46E5] rounded-2xl -z-10" />
+            <FaPhoneAlt className="text-white text-6xl " />
+          </motion.div>
+          <p className="mt-4 text-sm font-semibold text-gray-600 text-center">
+            Contact Us
+          </p>
+        </div>
+
+        <div className="flex flex-col h-fit items-center gap-2 mt-8">
+          <motion.div
+            onClick={() => handleNavigation("/layouts")}
+            className="relative flex items-center justify-center w-10 h-10 rounded-2xl cursor-pointer"
+          >
+            <motion.div className="absolute w-16 h-16 bg-[#4F46E5] rounded-2xl -z-10" />
+            <RiLayout2Fill className="text-white text-6xl " />
+          </motion.div>
+          <p className="mt-4 text-sm font-semibold text-gray-600 text-center">
+            Layouts
+          </p>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

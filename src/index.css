@@ -2,3 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Tailwind CSS custom styling for NProgress */
+#nprogress .bar {
+    @apply bg-[#4F46E5] h-1; /* Change color & height */
+  }
+  
+  #nprogress .peg {
+    @apply shadow-lg shadow-[#4F46E5]; /* Smooth glow effect */
+  }
+  
+  /* Optional: Hide default spinner */
+  #nprogress .spinner {
+    display: none;
+  }
+  

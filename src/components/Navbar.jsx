@@ -46,7 +46,6 @@ const Navbar = () => {
       <ul className="flex items-center justify-between gap-20">
         <li><Link className="text-md text-black text-center font-semibold " to="/home">Home</Link>
         </li>
-        <li><Link className="text-md font-semibold " to="/about">About</Link></li>
         <li><Link className="text-md font-semibold " to="contact">Contact Us</Link></li>
         <li><Link className="text-md font-semibold " to="/layouts">Browse Layouts</Link></li>
       </ul>

@@ -14,7 +14,7 @@ const Hero = () => {
 <h3 className=" font-normal text-xl lg:pb-8 text-center lg:text-5xl">Let's start by choosing layout.</h3>
 <div className="flex gap-5 justify-center">
   <button className=" bg-[#4F46E5] rounded-full text-white font-medium text-xs px-3 lg:text-lg lg:px-5 lg:py-3"><Link to="/layouts">Choose Layout</Link></button>
-  <button className="py-3 px-5 rounded-full  border-[1px] lg:border-2 border-gray-500 text-xs lg:text-lg font-semibold"><Link to="/about">About Us</Link></button>
+  <button className="py-3 px-5 rounded-full  border-[1px] lg:border-2 border-gray-500 text-xs lg:text-lg font-semibold"><Link to="/contact">Contact Us</Link></button>
 </div>
 </div>
 </div></div>
