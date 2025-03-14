@@ -34,7 +34,7 @@ const Menu = ({ toggleMenu, isMenuOpen }) => {
       <div className="relative">
         <ul className="flex gap-10 flex-col px-5 mt-5">
           <li className="text-gray-600 text-xl font-semibold">
-            <Link onClick={toggleMenu} className="flex justify-between" to="/">
+            <Link onClick={toggleMenu} className="flex justify-between" to="/home">
               Home <TbMathGreater className="text-gray-500 text-xl mr-4 font-semibold" />
             </Link>
           </li>

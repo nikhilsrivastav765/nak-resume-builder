@@ -44,7 +44,7 @@ const Navbar = () => {
     </div>
     <div className="fixed left-[50%] -translate-x-[50%] hidden lg:flex">
       <ul className="flex items-center justify-between gap-20">
-        <li><Link className="text-md text-black text-center font-semibold " to="/">Home</Link>
+        <li><Link className="text-md text-black text-center font-semibold " to="/home">Home</Link>
         </li>
         <li><Link className="text-md font-semibold " to="/about">About</Link></li>
         <li><Link className="text-md font-semibold " to="contact">Contact Us</Link></li>
@@ -74,7 +74,7 @@ const Navbar = () => {
 
         <div className="space-x-4">
           <ul className="flex items-center justify-between lg:gap-8">
-        <li><Link className="lg:text-lg bg-[#4F46E5] text-white px-5 py-2 rounded-full text-center text-xs lg:font-normal font-semibold" to="/auth">Get Started</Link>
+        <li><Link className="lg:text-lg bg-[#4F46E5] text-white px-5 py-2 rounded-full text-center text-md lg:font-normal font-semibold" to="/auth">Get Started</Link>
         </li>
       </ul>
         </div>
