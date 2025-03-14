@@ -5,17 +5,17 @@ import { motion } from "framer-motion";
 const layouts = [
   {
     title: "Modern Resume",
-    image: "src/assets/modern.jpg",
+    image: "https://i.pinimg.com/736x/e6/8a/2b/e68a2b5b741339d2d05e20502654a118.jpg",
     route: "/modern",
   },
   {
     title: "Classic Resume",
-    image: "src/assets/classic.jpg",
+    image: "https://i.pinimg.com/736x/cd/42/48/cd4248424047f912a3eab2c3c226b212.jpg",
     route: "/classic",
   },
   {
     title: "Creative Resume",
-    image: "src/assets/creative.jpg",
+    image: "https://i.pinimg.com/736x/93/f3/d5/93f3d53d14ff1e982dbff1d18bdb6825.jpg",
     route: "/creative",
   },
 ];
